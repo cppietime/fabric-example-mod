@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence",
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "%2$s:%1$s_planks"
+    }
+  },
+  "result": {
+    "item": "%2$s:%1$s_fence",
+    "count": 3
+  }
+}
+

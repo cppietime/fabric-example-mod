@@ -1,0 +1,19 @@
+[
+  {
+    "stemName": "foodie:my_stem",
+    "seedName": "foodie:my_stem_seed",
+    "gourdName": "foodie:my_gourd",
+    "seedLayers": [
+      "minecraft:item/melon_seeds,0000ff"
+    ],
+    "gourdTexture": [
+      "minecraft:block/melon_side,0000ff"
+    ],
+    "english": "Some Gourd",
+    "biomes": [
+      "jungle",
+      "forest",
+      "taiga"
+    ]
+  }
+]

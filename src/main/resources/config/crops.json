@@ -1,0 +1,22 @@
+[
+		{
+			"plantName": "my_crop",
+			"seedName": "foodie:my_seed",
+			"produceName": "foodie:my_food",
+			"cropTexture": [
+				"minecraft:block/wheat,ff0000"
+			],
+			"seedLayers": [
+				"minecraft:item/wheat_seeds,ffff00",
+				"minecraft:item/potato,0000ff"
+			],
+			"produceLayers": [
+				"minecraft:item/wheat,ffff00",
+				"minecraft:item/potato,0000ff"
+			],
+			"english": "Some Crop",
+			"saturation": 1,
+			"hunger": 1,
+			"canRightClick": true
+		}
+]

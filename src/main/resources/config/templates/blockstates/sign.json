@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "%2$s:block/%1$s_sign" }
+    }
+}

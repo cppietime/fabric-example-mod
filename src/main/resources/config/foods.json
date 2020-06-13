@@ -1,0 +1,21 @@
+[
+  {
+    "name": "testfood",
+    "english": "Test Food",
+    "hunger": 2,
+    "saturation": 1,
+    "textures": [
+      "minecraft:item/potato,00ff00",
+      "minecraft:item/carrot,5555bb"
+    ],
+    "ingredients": [
+      "item:foodie:euc_button"
+    ],
+    "craft": "smelting",
+    "effects": [
+      {
+        "name": "regeneration"
+      }
+    ]
+  }
+]
