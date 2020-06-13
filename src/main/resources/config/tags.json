@@ -1,0 +1,35 @@
+[
+  {
+    "id": "foodie:vanilla_value",
+    "members": [
+      "minecraft:wheat",
+      "minecraft:carrot",
+      "minecraft:potato",
+      "minecraft:beetroot",
+      "minecraft:pumpkin",
+      "minecraft:melon",
+      "minecraft:sweet_berries",
+      "minecraft:apple",
+      "minecraft:beef",
+      "minecraft:porkchop",
+      "minecraft:chicken",
+      "minecraft:rabbit",
+      "minecraft:mutton",
+      "minecraft:cod",
+      "minecraft:salmon",
+      "minecraft:tropical_fish",
+      "minecraft:egg",
+      "minecraft:mushroom_stew",
+      "minecraft:honey_bottle"
+    ]
+  },
+  {
+    "id": "foodie:vanilla_seeds",
+    "members": [
+      "minecraft:wheat_seeds",
+      "minecraft:pumpkin_seeds",
+      "minecraft:melon_seeds",
+      "minecraft:beetroot_seeds"
+    ]
+  }
+]

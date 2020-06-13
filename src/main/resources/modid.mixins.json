@@ -1,12 +1,20 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.fabricmc.example.mixin",
+  "package": "net.funguscow.foodie.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "DefaultResourcePackFix",
+    "BlockEntityMixin",
+    "HungerManagerMixin",
+    "PlayerEntityMixin",
+    "AxeItemMixin",
+    "ServerResourceMixin"
   ],
   "client": [
-    "ExampleMixin"
+    "SignRendererMixin",
+    "SignEditScreenMixin",
+    "ClientResourceMixin"
   ],
   "injectors": {
     "defaultRequire": 1

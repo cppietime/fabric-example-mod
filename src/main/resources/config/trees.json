@@ -1,0 +1,34 @@
+[
+  {
+    "trunkName": "foodie:euc_log",
+    "leafName": "foodie:euc_leaf",
+    "treeName": "foodie:euc",
+    "fruitName": "foodie:fruit",
+    "height": 8,
+    "woodTexture": ["minecraft:block/oak_log_top,ff0000"],
+    "barkTexture": ["minecraft:block/oak_log,00ffff"],
+    "leafTexture": ["minecraft:block/oak_leaves,00ff00"],
+    "saplingTexture": [
+      "minecraft:block/oak_sapling,ff00ff"
+    ],
+    "fruitTexture": [
+      "minecraft:item/apple,00ffff"
+    ],
+    "density": 0,
+    "extraChance": 0.25,
+    "extraDensity": 1,
+    "logTag": "foodie:euc_logs",
+    "treeEnglish": "Sometree",
+    "fruitEnglish": "Some Fruit",
+    "saturation": 1,
+    "hunger": 1,
+    "biomes": [
+      "plains",
+      "mountains",
+      "forest",
+      "taiga",
+      "swamp",
+      "jungle"
+    ]
+  }
+]

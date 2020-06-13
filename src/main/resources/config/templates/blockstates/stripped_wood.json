@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "%2$s:block/%1$s_stripped_wood" },
+    "axis=z": { "model": "%2$s:block/%1$s_stripped_wood", "x": 90 },
+    "axis=x": { "model": "%2$s:block/%1$s_stripped_wood", "x": 90, "y": 90 }
+  }
+}

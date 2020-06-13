@@ -1,0 +1,29 @@
+{   "parent": "block/thin_block",
+  "textures": {
+    "particle": "#texture"
+  },
+  "elements": [
+    {   "from": [ 1, 0, 1 ],
+      "to": [ 15, 1, 15 ],
+      "faces": {
+        "down":  { "tintindex": 0,  "uv": [ 1,  1, 15, 15 ], "texture": "#texture", "cullface": "down" },
+        "up":    { "tintindex": 0,  "uv": [ 1,  1, 15, 15 ], "texture": "#texture" },
+        "north": { "tintindex": 0,  "uv": [ 1, 15, 15, 16 ], "texture": "#texture" },
+        "south": { "tintindex": 0,  "uv": [ 1, 15, 15, 16 ], "texture": "#texture" },
+        "west":  { "tintindex": 0,  "uv": [ 1, 15, 15, 16 ], "texture": "#texture" },
+        "east":  { "tintindex": 0,  "uv": [ 1, 15, 15, 16 ], "texture": "#texture" }
+      }
+    },
+    {   "from": [ 1, 0, 1 ],
+      "to": [ 15, 1, 15 ],
+      "faces": {
+        "down":  { "tintindex": 1,  "uv": [ 1,  1, 15, 15 ], "texture": "#overlay", "cullface": "down" },
+        "up":    { "tintindex": 1,  "uv": [ 1,  1, 15, 15 ], "texture": "#overlay" },
+        "north": { "tintindex": 1,  "uv": [ 1, 15, 15, 16 ], "texture": "#overlay" },
+        "south": { "tintindex": 1,  "uv": [ 1, 15, 15, 16 ], "texture": "#overlay" },
+        "west":  { "tintindex": 1,  "uv": [ 1, 15, 15, 16 ], "texture": "#overlay" },
+        "east":  { "tintindex": 1,  "uv": [ 1, 15, 15, 16 ], "texture": "#overlay" }
+      }
+    }
+  ]
+}

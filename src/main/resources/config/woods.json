@@ -1,0 +1,18 @@
+[
+  {
+    "logTag": "foodie:euc_logs",
+    "woodName": "euc",
+    "barkTexture": ["minecraft:block/oak_log,ff0000"],
+    "woodTexture": ["minecraft:block/oak_log_top,ff0000"],
+    "strippedTexture": ["minecraft:block/stripped_oak_log,ff00ff"],
+    "plankTexture": [
+      "minecraft:block/oak_planks,ff0000",
+      "minecraft:block/grass,00ffff"
+    ],
+    "trapdoorTexture": ["minecraft:block/acacia_trapdoor,ff0000"],
+    "doorTextureTop": ["minecraft:block/oak_door_top,ff0000"],
+    "doorTextureBottom": ["minecraft:block/oak_door_bottom,ff0000"],
+    "english": "Some Wood",
+    "signType": "birch,00ffff"
+  }
+]
