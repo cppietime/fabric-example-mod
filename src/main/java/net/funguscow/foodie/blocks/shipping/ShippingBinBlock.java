@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -80,7 +81,8 @@ public class ShippingBinBlock extends Block implements BlockEntityProvider  {
             if(result == ActionResult.PASS)
                 result = ActionResult.SUCCESS;
         }
-        player.addChatMessage(new LiteralText("Now at " + entity.fillLevel + "/" + ShippingBinEntity.MAX_FULL), false);
+//        player.addChatMessage(new LiteralText("Now at " + entity.fillLevel + "/" + ShippingBinEntity.MAX_FULL), false);
+        player.addChatMessage(new TranslatableText("item.foodie.shipping_bin.message", entity.fillLevel, entity.MAX_FULL), false);
         return result;
     }
 

@@ -43,7 +43,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "tickMovement", at = @At(value = "HEAD"))
     public void hunger(CallbackInfo ci){
         if(hunger == null)
-            hunger = Float.parseFloat(FoodieConfig.getProperty("passiveHunger", "0"));
+            hunger = Float.parseFloat(FoodieConfig.getProperty("passive_hunger", ".002"));
         addExhaustion(hunger);
     }
 }

@@ -10,9 +10,11 @@ import net.funguscow.foodie.blocks.shipping.ShippingBinBlock;
 import net.funguscow.foodie.config.pojo.StemListing;
 import net.funguscow.foodie.utils.GsonHelper;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.AliasedBlockItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.GenerationStep;
@@ -23,6 +25,7 @@ import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,22 +39,30 @@ public class StemConfig extends FoodieConfig<StemListing> {
 
     @Override
     public void setup() {
-        for(StemListing stem : listings){
-            Identifier seedID = new Identifier(stem.seedName),
-                    gourdID = new Identifier(stem.gourdName),
-                    stemID = new Identifier(stem.stemName),
-                    attachedID = new Identifier(stem.stemName.replace(":", ":attached_"));
-            FoodieGourdBlock gourdBlock = new FoodieGourdBlock(FabricBlockSettings.copy(Blocks.MELON), stem.maxAge);
-            FoodieStemBlock stemBlock = new FoodieStemBlock(gourdBlock, FabricBlockSettings.copy(Blocks.MELON_STEM));
-            FoodieAttachedStemBlock attachedStemBlock = new FoodieAttachedStemBlock(gourdBlock, FabricBlockSettings.copy(Blocks.ATTACHED_MELON_STEM));
-            Item seeds = new AliasedBlockItem(stemBlock, new Item.Settings().group(FoodieMod.MAIN_GROUP));
-            gourdBlock.withSeeds(seeds).withStems(stemBlock, attachedStemBlock);
-            Item gourdItem = new BlockItem(gourdBlock, new Item.Settings().group(FoodieMod.MAIN_GROUP));
-            items.put(seedID, seeds);
-            items.put(gourdID, gourdItem);
-            blocks.put(gourdID, gourdBlock);
-            blocks.put(stemID, stemBlock);
-            blocks.put(attachedID, attachedStemBlock);
+        try {
+            Method compost = ComposterBlock.class.getDeclaredMethod("registerCompostableItem", float.class, ItemConvertible.class);
+            compost.setAccessible(true);
+            for (StemListing stem : listings) {
+                Identifier seedID = new Identifier(stem.seedName),
+                        gourdID = new Identifier(stem.gourdName),
+                        stemID = new Identifier(stem.stemName),
+                        attachedID = new Identifier(stem.stemName.replace(":", ":attached_"));
+                FoodieGourdBlock gourdBlock = new FoodieGourdBlock(FabricBlockSettings.copy(Blocks.MELON), stem.maxAge);
+                FoodieStemBlock stemBlock = new FoodieStemBlock(gourdBlock, FabricBlockSettings.copy(Blocks.MELON_STEM));
+                FoodieAttachedStemBlock attachedStemBlock = new FoodieAttachedStemBlock(gourdBlock, FabricBlockSettings.copy(Blocks.ATTACHED_MELON_STEM));
+                Item seeds = new AliasedBlockItem(stemBlock, new Item.Settings().group(FoodieMod.MAIN_GROUP));
+                gourdBlock.withSeeds(seeds).withStems(stemBlock, attachedStemBlock);
+                Item gourdItem = new BlockItem(gourdBlock, new Item.Settings().group(FoodieMod.MAIN_GROUP));
+                items.put(seedID, seeds);
+                items.put(gourdID, gourdItem);
+                blocks.put(gourdID, gourdBlock);
+                blocks.put(stemID, stemBlock);
+                blocks.put(attachedID, attachedStemBlock);
+                compost.invoke(null, 0.3f, seeds);
+                compost.invoke(null, 0.65f, gourdItem);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -96,9 +107,10 @@ public class StemConfig extends FoodieConfig<StemListing> {
             itemColor(itemTints, seedID);
             if(stem.gourdTexture.size() > 1)
                 cutout(gourdID);
-            if(stem.gourdTexture.contains(",")) {
+            if(stem.gourdTexture.stream().anyMatch(s -> s.contains(","))) {
                 final List<Integer> gourdTints = GsonHelper.colors(stem.gourdTexture);
                 blockColor(gourdTints, gourdID);
+                itemColor(gourdTints, gourdID);
             }
             if(stem.stemTexture.contains(",")){
                 final int color = Integer.parseInt(stem.stemTexture.split(",")[1], 16);

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "foodie:kombucha"
+  },
+  "result": "minecraft:leather",
+  "experience": 0.35
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "foodie:tofu"
+    },
+    {
+      "item": "foodie:egg_mold"
+    }
+  ],
+  "result": {
+    "item": "minecraft:chicken"
+  }
+}

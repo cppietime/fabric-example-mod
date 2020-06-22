@@ -16,9 +16,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.lang.reflect.Field;
+
 public class FoodieMod implements ModInitializer {
 
 	public static final String MODID = "foodie";
+	public static final String[] MOLDS = {"fish", "pork", "beef", "chicken", "egg", "mutton"};
 
 	public static ShippingBinBlock SHIPPING_BIN;
 	public static Item SHIPPING_BIN_ITEM;
@@ -47,6 +50,18 @@ public class FoodieMod implements ModInitializer {
 
 		Registry.register(Registry.BLOCK, new Identifier(MODID, "shipping_bin"), SHIPPING_BIN);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "shipping_bin"), SHIPPING_BIN_ITEM);
+
+		for(String mold : MOLDS){
+			Item moldItem = new Item(new Item.Settings().group(MAIN_GROUP));
+			try {
+				Field remainder = Item.class.getDeclaredField("recipeRemainder");
+				remainder.setAccessible(true);
+				remainder.set(moldItem, moldItem);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Registry.register(Registry.ITEM, new Identifier(MODID, mold + "_mold"), moldItem);
+		}
 
 	}
 }

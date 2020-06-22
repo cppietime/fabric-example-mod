@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "foodie:sugar_beet"
+    }
+  ],
+  "result": {
+    "item": "minecraft:sugar"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "foodie:cabbage"
+    },
+    {
+      "tag": "foodie:acid"
+    }
+  ],
+  "result": {
+    "item": "minecraft:red_dye"
+  }
+}

@@ -4,14 +4,17 @@ import net.funguscow.foodie.FoodieMod;
 import net.funguscow.foodie.blocks.shipping.ShippingBinBlock;
 import net.funguscow.foodie.config.pojo.FoodListing;
 import net.funguscow.foodie.utils.GsonHelper;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.EnchantedGoldenAppleItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class FoodConfig extends FoodieConfig<FoodListing> {
@@ -39,24 +42,31 @@ public class FoodConfig extends FoodieConfig<FoodListing> {
 
     @Override
     public void setup() {
-        for(FoodListing food : listings){
-            Item.Settings settings = new Item.Settings().group(FoodieMod.MAIN_GROUP);
-            Item foodItem;
-            if(food.hunger + food.saturation > 0 || (food.effects != null)) {
-                FoodComponent.Builder builder = new FoodComponent.Builder()
-                        .hunger((int) (food.hunger / Float.parseFloat(FoodieConfig.getProperty("hunger_multiplier", "1"))))
-                        .saturationModifier(food.saturation);
-                if (food.effects != null) {
-                    food.effects.forEach(e -> addEffect(builder, e));
-                    builder.alwaysEdible();
+        try {
+            Method compost = ComposterBlock.class.getDeclaredMethod("registerCompostableItem", float.class, ItemConvertible.class);
+            compost.setAccessible(true);
+            for (FoodListing food : listings) {
+                Item.Settings settings = new Item.Settings().group(FoodieMod.MAIN_GROUP);
+                Item foodItem;
+                if (food.hunger + food.saturation > 0 || (food.effects != null)) {
+                    FoodComponent.Builder builder = new FoodComponent.Builder()
+                            .hunger((int) (food.hunger / Float.parseFloat(FoodieConfig.getProperty("hunger_multiplier", "1"))))
+                            .saturationModifier(food.saturation);
+                    if (food.effects != null) {
+                        food.effects.forEach(e -> addEffect(builder, e));
+                        builder.alwaysEdible();
+                    }
+                    settings = settings.food(builder.build());
                 }
-                settings = settings.food(builder.build());
+                if (food.effects != null || food.glint)
+                    foodItem = new EnchantedGoldenAppleItem(settings);
+                else
+                    foodItem = new Item(settings);
+                items.put(new Identifier(FoodieMod.MODID, food.name), foodItem);
+                compost.invoke(null, 0.85f, foodItem);
             }
-            if(food.effects != null || food.glint)
-                foodItem = new EnchantedGoldenAppleItem(settings);
-            else
-                foodItem = new Item(settings);
-            items.put(new Identifier(FoodieMod.MODID, food.name), foodItem);
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 

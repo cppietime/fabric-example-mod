@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "foodie:tea_leaf"
+    }
+  ],
+  "result": {
+    "item": "minecraft:green_dye"
+  }
+}

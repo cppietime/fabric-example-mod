@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XSX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "foodie:chili"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "minecraft:blaze_rod"
+  }
+}

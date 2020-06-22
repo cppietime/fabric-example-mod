@@ -9,16 +9,15 @@ import net.funguscow.foodie.blocks.shipping.ShippingBinBlock;
 import net.funguscow.foodie.config.pojo.CropListing;
 import net.funguscow.foodie.utils.GsonHelper;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.AliasedBlockItem;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.block.ComposterBlock;
+import net.minecraft.item.*;
 import net.minecraft.loot.ConstantLootTableRange;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,30 +30,38 @@ public class CropsConfig extends FoodieConfig<CropListing> {
     }
 
     public void setup(){
-        for(CropListing crop : listings){
-            Identifier blockID = new Identifier(FoodieMod.MODID, crop.plantName),
-                seedID = new Identifier(crop.seedName),
-                produceID = new Identifier(crop.produceName);
-            if(crop.cropIsSeed && seedID.getNamespace().equals("minecraft")){
-                throw new RuntimeException("Cannot create a new crop whose seed already exists!");
-            }
-            FoodieCropBlock cropBlock = new FoodieCropBlock(FabricBlockSettings.copy(Blocks.WHEAT), crop);
-            Item.Settings seedSettings = new Item.Settings().group(FoodieMod.MAIN_GROUP);
-            if(crop.cropIsSeed && crop.hunger + crop.saturation > 0){
-                seedSettings = seedSettings.food(new FoodComponent.Builder().hunger(crop.hunger).saturationModifier(crop.saturation).build());
-            }
-            Item cropSeed = new AliasedBlockItem(cropBlock, seedSettings);
-            cropBlock.withSeedsItem(cropSeed);
-            blocks.put(blockID, cropBlock);
-            items.put(seedID, cropSeed);
-            if(!crop.cropIsSeed && !produceID.getNamespace().equals("minecraft")){
-                Item.Settings produceSettings = new Item.Settings().group(FoodieMod.MAIN_GROUP);
-                if(crop.hunger + crop.saturation > 0){
-                    produceSettings = produceSettings.food(new FoodComponent.Builder().hunger(crop.hunger).saturationModifier(crop.saturation).build());
+        try {
+            Method compost = ComposterBlock.class.getDeclaredMethod("registerCompostableItem", float.class, ItemConvertible.class);
+            compost.setAccessible(true);
+            for (CropListing crop : listings) {
+                Identifier blockID = new Identifier(FoodieMod.MODID, crop.plantName),
+                        seedID = new Identifier(crop.seedName),
+                        produceID = new Identifier(crop.produceName);
+                if (crop.cropIsSeed && seedID.getNamespace().equals("minecraft")) {
+                    throw new RuntimeException("Cannot create a new crop whose seed already exists!");
                 }
-                Item produce = new Item(produceSettings);
-                items.put(produceID, produce);
+                FoodieCropBlock cropBlock = new FoodieCropBlock(FabricBlockSettings.copy(Blocks.WHEAT), crop);
+                Item.Settings seedSettings = new Item.Settings().group(FoodieMod.MAIN_GROUP);
+                if (crop.cropIsSeed && crop.hunger + crop.saturation > 0) {
+                    seedSettings = seedSettings.food(new FoodComponent.Builder().hunger(crop.hunger).saturationModifier(crop.saturation).build());
+                }
+                Item cropSeed = new AliasedBlockItem(cropBlock, seedSettings);
+                cropBlock.withSeedsItem(cropSeed);
+                compost.invoke(null, 0.3f, cropSeed);
+                blocks.put(blockID, cropBlock);
+                items.put(seedID, cropSeed);
+                if (!crop.cropIsSeed && !produceID.getNamespace().equals("minecraft")) {
+                    Item.Settings produceSettings = new Item.Settings().group(FoodieMod.MAIN_GROUP);
+                    if (crop.hunger + crop.saturation > 0) {
+                        produceSettings = produceSettings.food(new FoodComponent.Builder().hunger(crop.hunger).saturationModifier(crop.saturation).build());
+                    }
+                    Item produce = new Item(produceSettings);
+                    items.put(produceID, produce);
+                    compost.invoke(null, 0.65f, produce);
+                }
             }
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -101,7 +108,7 @@ public class CropsConfig extends FoodieConfig<CropListing> {
                 itemColor(itemTints, seedId);
             }
             Identifier produceId = new Identifier(crop.produceName);
-            if(items.containsKey(produceId)){
+            if(!crop.cropIsSeed && items.containsKey(produceId)){
                 final List<Integer> itemTints = GsonHelper.colors(crop.produceLayers);
                 itemColor(itemTints, produceId);
             }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XBX"
+  ],
+  "key": {
+    "X": {
+      "item": "foodie:chili"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result":{
+    "item": "minecraft:lava_bucket"
+  }
+}

@@ -44,7 +44,7 @@ public class ShippingBinEntity extends BlockEntity implements ImplementedInvento
 
     public void maybeConvert(){
         if(MAX_FULL == null)
-            MAX_FULL = Integer.parseInt(FoodieConfig.getProperty("fill_level", "100"));
+            MAX_FULL = Integer.parseInt(FoodieConfig.getProperty("fill_level", "320"));
         if(fillLevel >= MAX_FULL){
             int count = fillLevel / MAX_FULL;
             int newCount = Math.min(getInvMaxStackAmount(), items.get(1).getCount() + count);

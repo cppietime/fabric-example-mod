@@ -8,7 +8,7 @@ public class TreeListing {
     public float extraChance = 0.5f;
     public String logTag = "minecraft:oak_logs";
     public float baseOdds = 0.005f;
-    public int value = 1;
+    public int value = 10;
     public String trunkName, leafName, treeName, fruitName;
     public String treeEnglish, fruitEnglish;
     public List<String> biomes;

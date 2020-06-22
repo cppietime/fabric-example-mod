@@ -4,7 +4,7 @@ import java.util.List;
 
 public class FoodListing {
 
-    public int value = 1;
+    public int value = 10;
     public int count = 1;
     public float xp = 0.35f;
     public boolean glint = false;

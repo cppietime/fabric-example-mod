@@ -39,7 +39,7 @@ public class CropWriter extends ComponentWriter<CropListing> {
     }
 
     private void writeProduceModel(CropListing crop){
-        if(crop.seedName.startsWith("minecraft:") || crop.cropIsSeed)
+        if(crop.produceName.startsWith("minecraft:") || crop.cropIsSeed)
             return;
         Path writeTo = converter.itemModels.resolve(crop.produceName.split(":")[1] + ".json");
         ConfigConverter.ItemModel model = new ConfigConverter.ItemModel(GsonHelper.firstTextures(crop.produceLayers));

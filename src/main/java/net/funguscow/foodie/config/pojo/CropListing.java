@@ -9,10 +9,10 @@ public class CropListing {
 
     public int maxAge = 7;
     public boolean cropIsSeed = false;
-    public boolean canRightClick = false;
+    public boolean canRightClick = true;
     public boolean findInWild = true;
     public int hunger = 1;
-    public int value = 1;
+    public int value = 10;
     public float saturation = 1;
     public String seedName;
     public String plantName;

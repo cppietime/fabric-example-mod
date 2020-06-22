@@ -69,7 +69,7 @@ public class FoodieCropBlock extends CropBlock {
                             .toArray(new ItemStack[0]));
             for (int i = 0; i < drops.size(); i++) {
                 ItemStack stack = drops.get(i);
-                if (stack.getItem() == getSeedsItem()) {
+                if (stack.getItem() == getSeedsItem() && !specs.cropIsSeed) {
                     ItemStack repl = stack.copy();
                     repl.decrement(1);
                     drops.set(i, repl);

@@ -1,0 +1,12 @@
+{
+  "itemGroup.foodie.maingroup": "Foodie Items",
+  "item.foodie.shipping_bin": "Shipping Bin",
+  "block.foodie.shipping_bin": "Shipping Bin",
+  "item.foodie.chicken_mold": "Chicken Mold",
+  "item.foodie.beef_mold": "Beef Mold",
+  "item.foodie.pork_mold": "Pork Mold",
+  "item.foodie.mutton_mold": "Mutton Mold",
+  "item.foodie.egg_mold": "Egg Mold",
+  "item.foodie.fish_mold": "Fish Mold",
+  "item.foodie.shipping_bin.message": "Filled to %d/%d"
+}
